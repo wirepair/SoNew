@@ -1,0 +1,15 @@
+SoNew Version 0.1 By Isaac Dawson
+SoNew [options]
+Options:
+    -h, --h             Prints this help
+    -i, --injection     An injection type (Choose by #):
+                                1. CreateRemoteThread & LoadLibrary
+                                2. CreateRemoteThread & WriteMemoryProcess
+                                3. CodeCave (NOT IMPLEMENTED)
+                                4. IATHooks (NOT IMPLEMENTED)
+    -v, --verbose       Be verbose
+    -l, --listprocs     Lists the processes and their pid
+    -p, --pid           <pid> Select a process by pid to inject into.
+    -n, --procname      <procname> Select process by name
+    -d, --dll           <dllpath> Full path to dll to inject
+    -f, --funcname      <dll func name> Function name in dll to call (if needed)
