@@ -2,3 +2,5 @@
 #include "sonewargumentvalidator.h"
 #include "method.h"
 #include "process.h"
+#include "injector.h"
+#include "injectorcrtll.h"

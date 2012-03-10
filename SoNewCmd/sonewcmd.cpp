@@ -6,19 +6,40 @@
 using namespace cppargparser;
 using namespace SoNew;
 
-
 int main(int argc, char *argv[], char *envp[]) {
+	SoNewArgumentParser argParser;
 	ParsedArgument pa;
-
+	Injector *injector;
 	tcout << "SoNew Version 0.1 By Isaac Dawson" << endl;
 	// do some sanity checks.
-	pa = ValidateArguments(argc, argv);
+	pa = ValidateArguments(argParser, argc, argv);
 		
 	// We've made it this far, let's create our injection method object via the users args
 	Method injectionMethod = Method(pa);
 	tcout << injectionMethod.m_injectionType << endl;
+
+	// setup our process object
 	Process proc(StringToNumber<int>(pa.getValue("-p")));
 	proc.printProcName();
+	switch(injectionMethod.m_injectionType) {
+		case CRTLL:
+			injector = new InjectorCRTLL(injectionMethod);
+			injector->Inject();
+			injector->Execute();
+			break;
+		case CRTWMP:
+			//injector = new InjectorCRTWMP(injectionMethod);
+			break;
+		case CodeCave:
+			//injector = new InjectorCodeCave(injectionMethod);
+			break;
+		case IATHooks:
+			//injector = new InjectorIATHooks(injectionMethod);
+			break;
+		default:
+			ShowError(argParser, L"Error: Unknown Injection Method");
+	}
+
 	return 0;
 }
 

@@ -38,8 +38,8 @@ namespace SoNew {
 		return true;
 	}
 
-	ParsedArgument ValidateArguments(int argc, char **argv) {
-		SoNewArgumentParser argParser;
+	ParsedArgument ValidateArguments(SoNewArgumentParser &argParser, int argc, char **argv) {
+		
 		UIntTypeValidator *inj_validator = new UIntTypeValidator(1, 4);
 		UIntTypeValidator *pid_validator = new UIntTypeValidator();
 		FilePathValidator *fp_validator = new FilePathValidator();

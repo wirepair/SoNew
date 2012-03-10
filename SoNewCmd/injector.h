@@ -11,7 +11,8 @@ namespace SoNew {
 		// where we are injected into in the remote process
 		virtual DWORD Inject() = 0; 
 		// Execute our junk in their shit! Return True on success
-		virtual BOOL Execute() const = 0;
+		virtual BOOL Execute() = 0;
+		virtual BOOL InjectAndExecute() = 0;
 	protected:
 		Method m_injMethod;
 	};

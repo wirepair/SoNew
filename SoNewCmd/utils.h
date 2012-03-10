@@ -36,7 +36,7 @@ namespace SoNew {
 
 	bool SetArguments(SoNewArgumentParser *argParser, UIntTypeValidator *injection_validator, UIntTypeValidator *pid_validator, FilePathValidator *filepath_validator);
 
-	ParsedArgument ValidateArguments(int argc, char **argv);
+	ParsedArgument ValidateArguments(SoNewArgumentParser &argParser, int argc, char **argv);
 
 	// Misc String/Number Helper Functions
 	char* narrow( const wstring &str);
