@@ -1,8 +1,0 @@
-C:\Research\SoNew\SoNewGui\bin\Debug\SoNewGui.exe
-C:\Research\SoNew\SoNewGui\bin\Debug\SoNewGui.pdb
-C:\Research\SoNew\SoNewGui\obj\Debug\ResolveAssemblyReference.cache
-C:\Research\SoNew\SoNewGui\obj\Debug\SoNewGui.Properties.Resources.resources
-C:\Research\SoNew\SoNewGui\obj\Debug\SoNewGui.csproj.GenerateResource.Cache
-C:\Research\SoNew\SoNewGui\obj\Debug\SoNewGui.exe
-C:\Research\SoNew\SoNewGui\obj\Debug\SoNewGui.pdb
-C:\Research\SoNew\SoNewGui\obj\Debug\SoNewGui.SoNewForm.resources
