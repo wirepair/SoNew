@@ -83,7 +83,7 @@ namespace SoNew {
 		return VirtualAllocEx(hProcess, NULL, len, MEM_COMMIT, PAGE_READWRITE);
 	}
 
-	BOOL WriteToRemoteMemory(HANDLE hProcess, void* pAddr, char* szDllName, size_t len) {
-		return WriteProcessMemory(hProcess, &pAddr, (LPCVOID)szDllName, len, NULL);
+	BOOL WriteToRemoteMemory(HANDLE hProcess, void* pAddress, char* pDllName, size_t len) {
+		return WriteProcessMemory(hProcess, &pAddress, (LPCVOID)pDllName, len, NULL);
 	}
 }

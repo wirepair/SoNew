@@ -10,11 +10,9 @@ namespace SoNew {
 	class InjectorCRTLL : public Injector {
 	public:
 		InjectorCRTLL(const Method &injMethod);//  : Injector(injMethod) {};
-		virtual DWORD Inject();
-		virtual BOOL Execute();
-		virtual BOOL InjectAndExecute();
-	protected:
-		Method m_injectionMethod;
+		virtual LPVOID Inject(HANDLE hProcess);
+		virtual BOOL Execute(HANDLE hProcess);
+		virtual BOOL InjectAndExecute(HANDLE hProcess);
 	};
 }
 #endif

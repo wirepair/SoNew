@@ -10,20 +10,23 @@ namespace SoNew {
 		this->m_hProcess = GetProcessByName(name);
 	}
 
-	bool Process::InjectDll(const String &strDllName) {
-		size_t len = strDllName.length();
-		this->m_pRemoteNameAddr = RemoteAllocate(this->m_hProcess, len);
-		char *dll = narrow(strDllName);
-		WriteToRemoteMemory(this->m_hProcess, this->m_pRemoteNameAddr, dll, len);
-		return true;
+	BOOL Process::InjectInto(Injector &injector) {
+		if (injector.Inject(m_hProcess)) {
+			return injector.Execute(m_hProcess);
+		}
+		return false;
 	}
 
-	void Process::printProcName() {
+	void Process::printProcessName() {
 		if (this->m_hProcess == NULL) {
 			tcout << "We don't have a handle to any process." << endl;
 		} else {
 			tcout << "We have a handle to: " << GetProcessNameByHandle(this->m_hProcess) << endl;
 		}
+	}
+
+	String Process::getProcessName() {
+		return GetProcessNameByHandle(this->m_hProcess);
 	}
 
 	Process::~Process() {

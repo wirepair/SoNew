@@ -6,12 +6,13 @@ namespace SoNew {
 
 	void ShowUsage(const SoNewArgumentParser &argParser) {
 		argParser.showHelp("SoNew [options]", 20);
-		exit(-1);
 	}
 
 	void ShowError(const SoNewArgumentParser &argParser, const String &message) {
-		tcout << message << endl;
 		ShowUsage(argParser);
+		tcout << message << endl;
+		exit(-1);
+
 	}
 
 	bool SetArguments(SoNewArgumentParser *argumentParser, UIntTypeValidator *injection_validator, 
@@ -52,13 +53,14 @@ namespace SoNew {
 				PrintProcessList();
 				exit(0);
 			}
-			if (pa.hasArgument("-h"))
+			if (pa.hasArgument("-h")) {
 				ShowUsage(argParser);
+				exit(0);
+			}
 			if (!pa.hasArgument("-p") && !pa.hasArgument("-n"))
 				ShowError(argParser, L"Error: We require a process name or pid!");
 			if (!pa.hasArgument("-i"))
 				ShowError(argParser, L"Error: We require an injection method!");
-			tcout << StringToWstring(pa.getValue("-p")) << endl;
 		} catch(InvalidArgumentException iae) {
 			String message = StringToWstring(iae.what());
 			ShowError(argParser, message);

@@ -7,6 +7,7 @@ using namespace cppargparser;
 using namespace SoNew;
 
 int main(int argc, char *argv[], char *envp[]) {
+	Process *proc = 0;
 	SoNewArgumentParser argParser;
 	ParsedArgument pa;
 	Injector *injector;
@@ -16,16 +17,11 @@ int main(int argc, char *argv[], char *envp[]) {
 		
 	// We've made it this far, let's create our injection method object via the users args
 	Method injectionMethod = Method(pa);
-	tcout << injectionMethod.m_injectionType << endl;
-
-	// setup our process object
-	Process proc(StringToNumber<int>(pa.getValue("-p")));
-	proc.printProcName();
 	switch(injectionMethod.m_injectionType) {
 		case CRTLL:
+			if (injectionMethod.m_pDllName == NULL)
+				ShowError(argParser, L"Error: CreateRemoteThread & LoadLibrary Method Requires a DLL!");
 			injector = new InjectorCRTLL(injectionMethod);
-			injector->Inject();
-			injector->Execute();
 			break;
 		case CRTWMP:
 			//injector = new InjectorCRTWMP(injectionMethod);
@@ -38,8 +34,23 @@ int main(int argc, char *argv[], char *envp[]) {
 			break;
 		default:
 			ShowError(argParser, L"Error: Unknown Injection Method");
+			exit(-1);
+	}
+	if (injector == NULL) {
+		ShowError(argParser, L"Our Injector is null.");
 	}
 
+	// setup our process object
+	if (pa.hasArgument("-p"))
+		proc = new Process(StringToNumber<int>(pa.getValue("-p")));
+	else if (pa.hasArgument("-n"))
+		proc = new Process(StringToWstring(pa.getValue("-n")));
+	if (proc == 0) 
+		ShowError(argParser, L"We do not have a process selected!");
+	tcout << "Process: " << proc->getProcessName() << " selected." << endl;
+	proc->InjectInto(*injector);
+	delete injector;
+	delete proc;
 	return 0;
 }
 

@@ -1,6 +1,7 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 #include "utils.h"
+#include "injector.h"
 #include "win32functions.h"
 
 namespace SoNew {
@@ -9,9 +10,10 @@ namespace SoNew {
 		Process(DWORD dwPid);
 		Process(const String &name);
 		
-		bool InjectDll(const String &dllName);
+		BOOL InjectInto(Injector &injector);
 		//bool InjectDllAndExecFunc(const String &dllName, 
-		void printProcName();
+		void printProcessName();
+		String getProcessName();
 
 		~Process();
 	private:
