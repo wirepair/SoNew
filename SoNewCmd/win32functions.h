@@ -14,9 +14,11 @@ namespace SoNew {
 	// Remote Thread & Memory Helpers
 	LPVOID RemoteAllocate(HANDLE process, size_t len);
 	BOOL WriteToRemoteMemory(HANDLE process, void* pAddress, char* pDllName, size_t len);
+	PTHREAD_START_ROUTINE LoadLibraryAddress();
 
 	// Various UI/Text Functions
 	void PrintProcessList();
 	void PrintProcessByPid(DWORD pid);
+	void PrintLastErrorMessage(String start_message);
 }
 #endif

@@ -83,7 +83,29 @@ namespace SoNew {
 		return VirtualAllocEx(hProcess, NULL, len, MEM_COMMIT, PAGE_READWRITE);
 	}
 
-	BOOL WriteToRemoteMemory(HANDLE hProcess, void* pAddress, char* pDllName, size_t len) {
-		return WriteProcessMemory(hProcess, &pAddress, (LPCVOID)pDllName, len, NULL);
+	BOOL WriteToRemoteMemory(HANDLE hProcess, void* pAddress, char* pData, size_t len) {
+		tcout << "[*] Writing: " << pData << " to the remote process." << endl;
+		return WriteProcessMemory(hProcess, (PVOID)pAddress, (LPCVOID)pData, len, NULL);
+	}
+
+	PTHREAD_START_ROUTINE LoadLibraryAddress() {
+		return (PTHREAD_START_ROUTINE)GetProcAddress(GetModuleHandle(L"Kernel32"), "LoadLibraryA");
+	}
+
+	void PrintLastErrorMessage(String start_message) {
+		DWORD error_code = GetLastError();
+		LPVOID lpMsgBuf;
+		
+		FormatMessage(
+			FORMAT_MESSAGE_ALLOCATE_BUFFER | 
+			FORMAT_MESSAGE_FROM_SYSTEM |
+			FORMAT_MESSAGE_IGNORE_INSERTS,
+			NULL,
+			error_code,
+			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+			(LPTSTR) &lpMsgBuf,
+			0, NULL );
+		tcout << start_message << " code: " << error_code << " msg: " << static_cast<TCHAR*>(lpMsgBuf) << endl;
+		LocalFree(lpMsgBuf);
 	}
 }

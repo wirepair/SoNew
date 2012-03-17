@@ -11,8 +11,14 @@ namespace SoNew {
 	public:
 		InjectorCRTLL(const Method &injMethod);//  : Injector(injMethod) {};
 		virtual LPVOID Inject(HANDLE hProcess);
-		virtual BOOL Execute(HANDLE hProcess);
+		//virtual BOOL Execute(HANDLE hProcess);
+		virtual BOOL Execute();
 		virtual BOOL InjectAndExecute(HANDLE hProcess);
+		~InjectorCRTLL();
+	protected:
+		LPVOID m_remoteAddress; // set on Inject
+		HANDLE m_hProcess; // set on Inject
+		HANDLE m_hThread; // set on Execute
 	};
 }
 #endif

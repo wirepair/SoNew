@@ -72,7 +72,7 @@ namespace SoNew {
 	}
 
 	// NFI if this is the best way to convert wchar's to chars...
-	char* narrow( const wstring& strText) {
+	char* narrow(wstring& strText) {
 		ostringstream stm;
 		const ctype<char> &ctfacet = use_facet< ctype<char> >( stm.getloc() ) ;
 		for( size_t i=0 ; i<strText.size() ; ++i )

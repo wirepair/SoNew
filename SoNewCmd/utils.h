@@ -39,7 +39,7 @@ namespace SoNew {
 	ParsedArgument ValidateArguments(SoNewArgumentParser &argParser, int argc, char **argv);
 
 	// Misc String/Number Helper Functions
-	char* narrow( const wstring &str);
+	char* narrow(String &str);
 	String StringToWstring(const string &input);
 	
 	template <class T> T StringToNumber ( const string &Text ) {

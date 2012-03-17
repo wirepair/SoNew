@@ -11,9 +11,11 @@ namespace SoNew {
 	}
 
 	BOOL Process::InjectInto(Injector &injector) {
-		if (injector.Inject(m_hProcess)) {
-			return injector.Execute(m_hProcess);
+		LPVOID address = injector.Inject(m_hProcess);
+		if (address != 0) {
+			return injector.Execute();
 		}
+		tcout << "[*] ERROR: Injection Failed." << endl;
 		return false;
 	}
 
