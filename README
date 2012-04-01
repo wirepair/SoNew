@@ -4,8 +4,8 @@ Options:
     -h, --h             Prints this help
     -i, --injection     An injection type (Choose by #):
                                 1. CreateRemoteThread & LoadLibrary
-                                2. CreateRemoteThread & WriteMemoryProcess
-                                3. CodeCave (NOT IMPLEMENTED)
+                                2. CodeCave
+                                3. CreateRemoteThread & WriteMemoryProcess (NOT IMPLEMENTED)
                                 4. IATHooks (NOT IMPLEMENTED)
     -v, --verbose       Be verbose
     -l, --listprocs     Lists the processes and their pid
@@ -13,3 +13,12 @@ Options:
     -n, --procname      <procname> Select process by name
     -d, --dll           <dllpath> Full path to dll to inject
     -f, --funcname      <dll func name> Function name in dll to call (if needed)
+
+Examples:
+SoNewCmd.exe -i 1 -n winamp.exe -d C:\Research\SoNew\Debug\SoNewTestDll.dll
+Uses CreateRemoteThread & LoadLibrary to force winamp.exe to load the SoNewTestDll.dll
+
+SoNewCmd.exe -i 2 -p 423 -d C:\Research\SoNew\Debug\SoNewTestDll.dll -f RunTest
+Uses AsmJit based loader (code cave) and forcing the remote process to execute our loader and then
+our function RunTest which exists in the dll.
+
